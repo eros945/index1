@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.task-input {
+  margin-bottom: 15px;
+}
+
+#taskList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 5px;
+  border: 1px solid #e61010;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: rgb(99, 26, 216);
+}
