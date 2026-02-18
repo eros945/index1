@@ -1,26 +1,95 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  margin: 20px;
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Контейнер */
+.container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  width: 400px;
+  text-align: center;
+}
+
+/* Заголовок */
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Поле ввода и кнопка */
 .task-input {
-  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
+#taskText {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#addTaskBtn {
+  padding: 8px 12px;
+  background: #74ebd5;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#addTaskBtn:hover {
+  background: #4bb3a7;
+  color: white;
+}
+
+/* Список задач */
 #taskList {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
-.task {
+.task-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
   margin-bottom: 8px;
-  padding: 5px;
-  border: 1px solid #e61010;
+  padding: 8px;
+  border-radius: 6px;
 }
 
-.completed {
+.task-item.completed {
   text-decoration: line-through;
-  color: rgb(99, 26, 216);
+  color: gray;
+}
+.admin-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-panel button {
+  flex: 1;
+  padding: 8px;
+  background: #ACB6E5;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-panel button:hover {
+  background: #7a89c2;
+  color: white;
 }

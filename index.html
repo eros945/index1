@@ -6,17 +6,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Менеджер задач студента</h1>
-  
-  <div class="task-input">
-    <input type="text" id="taskInput" placeholder="Введите задачу">
-    <button id="addTaskBtn">Добавить</button>
+  <div class="container">
+    <h1>Менеджер задач студента</h1>
+
+    <!-- Панель администратора -->
+    <div class="admin-panel">
+      <button id="showAllBtn">Показать все задачи</button>
+      <button id="showCompletedBtn">Показать выполненные</button>
+      <button id="showPendingBtn">Показать невыполненные</button>
+      <button id="clearAllBtn">Удалить все задачи</button>
+    </div>
+
+    <!-- Добавление задачи -->
+    <div class="task-input">
+      <input type="text" id="taskText" placeholder="Введите задачу...">
+      <button id="addTaskBtn">Добавить</button>
+    </div>
+
+    <!-- Список задач -->
+    <ul id="taskList"></ul>
+    <p id="taskCount">Всего задач: 0</p>
   </div>
-  
-  <ul id="taskList"></ul>
-  
-  <p>Всего задач: <span id="taskCount">0</span></p>
-  
   <script src="script.js"></script>
 </body>
 </html>
+

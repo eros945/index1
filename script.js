@@ -1,51 +1,69 @@
-const taskInput = document.querySelector("#taskInput");
-const addTaskBtn = document.querySelector("#addTaskBtn");
-const taskList = document.querySelector("#taskList");
-const taskCount = document.querySelector("#taskCount");
+const taskInput = document.getElementById("taskText");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
+const taskCount = document.getElementById("taskCount");
+
+const showAllBtn = document.getElementById("showAllBtn");
+const showCompletedBtn = document.getElementById("showCompletedBtn");
+const showPendingBtn = document.getElementById("showPendingBtn");
+const clearAllBtn = document.getElementById("clearAllBtn");
 
 let tasks = [];
 
+// Добавление задачи
 addTaskBtn.addEventListener("click", () => {
-  const taskText = taskInput.value.trim();
-  if (taskText !== "") {
-    const task = { text: taskText, completed: false };
-    tasks.push(task);
+  const text = taskInput.value.trim();
+  if (text !== "") {
+    tasks.push({ text, completed: false });
     taskInput.value = "";
     renderTasks();
   }
 });
 
-function renderTasks() {
+// Отображение списка задач
+function renderTasks(filter = "all") {
   taskList.innerHTML = "";
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.className = "task";
-    
-    const span = document.createElement("span");
-    span.textContent = task.text;
-    if (task.completed) {
-      span.classList.add("completed");
-    }
+  let filteredTasks = tasks;
 
-    const completeBtn = document.createElement("button");
-    completeBtn.textContent = "✔";
-    completeBtn.addEventListener("click", () => {
-      tasks[index].completed = !tasks[index].completed;
-      renderTasks();
-    });
-    
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "✖";
-    deleteBtn.addEventListener("click", () => {
-      tasks.splice(index, 1);
-      renderTasks();
-    });
-    
-    li.appendChild(span);
-    li.appendChild(completeBtn);
-    li.appendChild(deleteBtn);
+  if (filter === "completed") {
+    filteredTasks = tasks.filter(t => t.completed);
+  } else if (filter === "pending") {
+    filteredTasks = tasks.filter(t => !t.completed);
+  }
+
+  filteredTasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.className = "task-item" + (task.completed ? " completed" : "");
+    li.innerHTML = `
+      <span>${task.text}</span>
+      <div>
+        <button onclick="toggleTask(${index})">✔</button>
+        <button onclick="deleteTask(${index})">✖</button>
+      </div>
+    `;
     taskList.appendChild(li);
   });
-  
-  taskCount.textContent = tasks.length;
+
+  taskCount.textContent = `Всего задач: ${tasks.length}`;
 }
+
+// Удаление задачи
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  renderTasks();
+}
+
+// Отметить задачу как выполненную
+function toggleTask(index) {
+  tasks[index].completed = !tasks[index].completed;
+  renderTasks();
+}
+
+// Панель управления
+showAllBtn.addEventListener("click", () => renderTasks("all"));
+showCompletedBtn.addEventListener("click", () => renderTasks("completed"));
+showPendingBtn.addEventListener("click", () => renderTasks("pending"));
+clearAllBtn.addEventListener("click", () => {
+  tasks = [];
+  renderTasks();
+});
